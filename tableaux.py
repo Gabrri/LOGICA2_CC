@@ -110,32 +110,66 @@ def imprime_hoja(H):
 		cadena += Inorder(f)
 	return cadena + "}"
 
+def imprime_tableau(tableau):
+	primero = True
+	for H in tableau:
+		if primero == True:
+			cadena = '[' + imprime_hoja(H)
+			primero = False
+		else:
+		 cadena += ", " + imprime_hoja(H)
+	return cadena + "]"
+
 def par_complementario(l):
-	# Esta función determina si una lista de solo literales
-	# contiene un par complementario
-	# Input: l, una lista de literales
-	# Output: True/False
+	#Dada una función de literales h, verifica si en h hay por lo menos un par complementario
+	temp= []
+	for q in lista:
+		if q.right != None:
+			letra = q.label + q.right.label
+		else:
+			letra = q.label
+		noletra = "-" + letra
+		prov = letra[1:]
+		if prov in temp or noletra in temp:
+			return True
+		temp.append(letra)
 	return False
 
 def es_literal(D):
-	I = D.copy()
-	for i in I:
-		if(i[0] == '-'):
-			I.pop(i)
-			i = Complemento(i)
-			if(I.get(i) == 0):
-				I[i[0]] = 1
-			return True       
-			else:
-				I[i[0]] = 0
-	return False
+	#Dada una fórmula A verifica si A es un literal
+	if A.label in letrasProposicionales:
+		return True
+	elif A.label == "-":
+		if A.right.label in letrasProposicionales:
+			return True
+	else:
+		return False
 
 def no_literales(l):
-	# Esta función determina si una lista de fórmulas contiene
-	# solo literales
-	# Input: l, una lista de fórmulas como árboles
-	# Output: None/f, tal que f no es literal
-	return False
+	#Dada una lista de fórmulas h, verifica si en h hay alguna fórmula que no es literales
+	for q in lista:
+		if not literal(q):
+			return False
+	return True
+
+
+def alfa_beta(a):
+	if a.label == '-':
+		if a.right.label == '-':
+			return '1ALFA'
+		elif a.right.label == 'O':
+			return '3ALFA'
+		elif a.right.label == '>':
+			return '4ALFA'
+		elif a.right.label == 'Y':
+			return '1BETA'
+	else:
+		if a.label == 'Y':
+			return '2ALFA'
+		elif a.label == 'O':
+			return '2BETA'
+		elif a.label == '>':
+			return '3BETA'
 
 def clasifica_y_extiende(f):
 	# clasifica una fórmula como alfa o beta y extiende listaHojas
@@ -145,11 +179,15 @@ def clasifica_y_extiende(f):
 	global listaHojas
 
 def Tableaux(f):
+arbol = StringtoTree(formula, letrasProposicionales)
+lista = [[arbol]]
+open = []
+open = regla_aprop(lista)
+if len(open) > 0:
+	return "La formula es abierta."
+else:
+	return "La formula es cerrada."
 
-	# Algoritmo de creacion de tableau a partir de lista_hojas
-	# Imput: - f, una fórmula como string en notación polaca inversa
-	# Output: interpretaciones: lista de listas de literales que hacen
-	#		 verdadera a f
 	global listaHojas
 	global listaInterpsVerdaderas
 
