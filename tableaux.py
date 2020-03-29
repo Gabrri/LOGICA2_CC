@@ -170,54 +170,54 @@ def alfa_beta(a):
 		elif a.right.label == 'Y':
 			return '1BETA'
 	elif a.label == 'Y':
-		print("hola")
 		return '2ALFA'
 	elif a.label == 'O':
 		return '2BETA'
 	elif a.label == '>':
 		return '3BETA'
+#print(alfa_beta(Tree('Y',q,p)))
 
 def clasifica_y_extiende(f):
     global listaHojas
     for a in listaHojas:
         for i in a:
             if i == f and alfa_beta(f) == '1ALFA':
-	            listaHojas.remove(i)
+	            a.remove(i)
 	            new = f.right.right
-	            listaHojas.insert(i,[new])
+	            a.insert(i,[new])
             elif i == f and alfa_beta(f) == '2ALFA':
-	            listaHojas.remove(i)
+	            a.remove(i)
 	            new1 = f.left
 	            new2 = f.right
-	            listaHojas.insert(i,[new1,new2])
+	            a.insert(i,[new1,new2])
             elif i == f and alfa_beta(f) == '3ALFA':
-	            listaHojas.remove(i)
+	            a.remove(i)
 	            new1 = Tree('-',None,f.left)
 	            new2 = Tree('-',None,f.right)
-	            listaHojas.insert(i,[new1,new2])
+	            a.insert(i,[new1,new2])
             elif i == f and alfa_beta(f) == '4ALFA':
-	            listaHojas.remove(i)
+	            a.remove(i)
 	            new1 = f.left
 	            new2 = Tree('-',None,f.right)
-	            listaHojas.insert(i,[new1,new2])
+	            a.insert(i,[new1,new2])
             elif i == f and alfa_beta(f) == '1BETA':
-	            listaHojas.remove(i)
+	            a.remove(i)
 	            new1 = Tree('-',None,f.left)
 	            new2 = Tree('-',None,f.right)
-	            listaHojas.insert(i,[new2])
-	            listaHojas.insert(i,[new1])
+	            a.insert(i,[new2])
+	            a.insert(i,[new1])
             elif i == f and alfa_beta(f) == '2BETA':
-	            listaHojas.remove(i)
+	            a.remove(i)
 	            new1 = f.left
 	            new2 = f.right
-	            listaHojas.insert(i,[new2])
-	            listaHojas.insert(i,[new1])
+	            a.insert(i,[new2])
+	            a.insert(i,[new1])
             elif i == f and alfa_beta(f) == '3BETA':
-	            listaHojas.remove(i)
+	            a.remove(i)
 	            new1 = Tree('-',None,f.left)
 	            new2 = f.right
-	            listaHojas.insert(i,[new2])
-	            listaHojas.insert(i,[new1])
+	            a.insert(i,[new2])
+	            a.insert(i,[new1])
 listaHojas= [[p],[Tree('Y',q,p)]]
 clasifica_y_extiende(Tree('Y',q,p))
 print (listaHojas)
