@@ -175,60 +175,64 @@ def alfa_beta(a):
 		return '2BETA'
 	elif a.label == '>':
 		return '3BETA'
-#print(alfa_beta(Tree('Y',q,p)))
+#print(alfa_beta(Tree('>',q,p)))
 
 def clasifica_y_extiende(f):
-    global listaHojas
-    for a in listaHojas:
-        for i in a:
-            if i == f and alfa_beta(f) == '1ALFA':
-	            a.remove(i)
-	            new = f.right.right
-	            a.insert(i,[new])
-            elif i == f and alfa_beta(f) == '2ALFA':
-	            a.remove(i)
-	            new1 = f.left
-	            new2 = f.right
-	            a.insert(i,[new1,new2])
-            elif i == f and alfa_beta(f) == '3ALFA':
-	            a.remove(i)
-	            new1 = Tree('-',None,f.left)
-	            new2 = Tree('-',None,f.right)
-	            a.insert(i,[new1,new2])
-            elif i == f and alfa_beta(f) == '4ALFA':
-	            a.remove(i)
-	            new1 = f.left
-	            new2 = Tree('-',None,f.right)
-	            a.insert(i,[new1,new2])
-            elif i == f and alfa_beta(f) == '1BETA':
-	            a.remove(i)
-	            new1 = Tree('-',None,f.left)
-	            new2 = Tree('-',None,f.right)
-	            a.insert(i,[new2])
-	            a.insert(i,[new1])
-            elif i == f and alfa_beta(f) == '2BETA':
-	            a.remove(i)
-	            new1 = f.left
-	            new2 = f.right
-	            a.insert(i,[new2])
-	            a.insert(i,[new1])
-            elif i == f and alfa_beta(f) == '3BETA':
-	            a.remove(i)
-	            new1 = Tree('-',None,f.left)
-	            new2 = f.right
-	            a.insert(i,[new2])
-	            a.insert(i,[new1])
-listaHojas= [[p],[Tree('Y',q,p)]]
-clasifica_y_extiende(Tree('Y',q,p))
-print (listaHojas)
-for i in listaHojas:
-    for j in i:
-        print (Inorder(j))
-#Tree(-,)
-	# clasifica una fórmula como alfa o beta y extiende listaHojas
+    # clasifica una fórmula como alfa o beta y extiende listaHojas
 	# de acuerdo a la regla respectiva
 	# Input: f, una fórmula como árbol
 	# Output: no tiene output, pues modifica la variable global listaHojas
+    global listaHojas
+    for a in listaHojas:
+        for i in a:
+            if Inorder(i) == f and alfa_beta(f) == '1ALFA':
+	            a.remove(i)
+	            new = f.right.right
+	            a.append([new])
+            elif Inorder(i)== Inorder(f) and alfa_beta(f) == '2ALFA':
+                a.remove(i)
+                new1 = f.left
+                new2 = f.right
+                a.append([new1,new2])
+            elif Inorder(i)== Inorder(f) and alfa_beta(f) == '3ALFA':
+	            a.remove(i)
+	            new1 = Tree('-',None,f.left)
+	            new2 = Tree('-',None,f.right)
+	            a.insert(i,[new1,new2])
+            elif Inorder(i)== Inorder(f) and alfa_beta(f) == '4ALFA':
+	            a.remove(i)
+	            new1 = f.left
+	            new2 = Tree('-',None,f.right)
+	            a.insert(i,[new1,new2])
+            elif Inorder(i)== Inorder(f) and alfa_beta(f) == '1BETA':
+	            a.remove(i)
+	            new1 = Tree('-',None,f.left)
+	            new2 = Tree('-',None,f.right)
+	            a.insert(i,[new2])
+	            a.insert(i,[new1])
+            elif Inorder(i)== Inorder(f) and alfa_beta(f) == '2BETA':
+	            a.remove(i)
+	            new1 = f.left
+	            new2 = f.right
+	            a.append([new2])
+	            a.append([new1])
+            elif Inorder(i)== Inorder(f) and alfa_beta(f) == '3BETA':
+	            a.remove(i)
+	            new1 = Tree('-',None,f.left)
+	            new2 = f.right
+	            a.append([new2])
+	            a.append([new1])
+ki = Tree('O',q,p)
+listaHojas= [[p],[Tree('Y',q,p),q]]
+print (listaHojas)
+clasifica_y_extiende(Tree('Y',q,p))
+print("---------------------------")
+print (listaHojas)
+#for i in listaHojas:
+#    for j in i:
+#        print (Inorder(j))
+
+	
 
 
 
@@ -273,3 +277,8 @@ def Tableaux(f):
             clasifica_y_extiende(no_literales(hoja))
 
      return listaInterpsVerdaderas
+#print (listaInterpsVerdaderas)
+#print(listaHojas)
+#listaHojas= [[p],[Tree('Y',q,p),q]]
+#print(choice(listaHojas))
+
