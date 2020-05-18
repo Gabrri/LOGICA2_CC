@@ -5,7 +5,7 @@ from random import choice
 ##############################################################################
 
 # Crea las letras minúsculas a-z
-letrasProposicionales = [chr(x) for x in range(97, 123)]
+letrasProposicionales = [chr(x) for x in range(256, 1300)]
 # inicializa la lista de interpretaciones
 listaInterpsVerdaderas = []
 # inicializa la lista de hojas
@@ -82,17 +82,23 @@ def String2Tree(A):
     Conectivos = ['O','Y','>']
     Pila = []
     for c in A:
+        #print("Examinando " + str(c))
         if c in letrasProposicionales:
+            #print(u"El símbolo es letra proposicional")
             Pila.append(Tree(c,None,None))
         elif c=='-':
+            #print("Negamos")
             FormulaAux = Tree(c,None,Pila[-1])
             del Pila[-1]
             Pila.append(FormulaAux)
         elif c in Conectivos:
+            #print("Unimos mediante conectivo")
             FormulaAux = Tree(c,Pila[-1],Pila[-2])
             del Pila[-1]
             del Pila[-1]
             Pila.append(FormulaAux)
+        else:
+            print(u"Hay un problema: el símbolo " + str(c)+ " no se reconoce")
     return Pila[-1]
 #
 #print(string2Tree('rq O -p∧',letrasProposicionales))
@@ -161,7 +167,7 @@ def no_literales(l):
 	return True
 
 #print(par_complementario([p,q]))
-#print(no_literales([p,q])) 
+#print(no_literales([p,q]))
 
 #nopoq = Tree('-',None, Tree('O',p,q))
 #print(Inorder(nnp))
@@ -193,7 +199,7 @@ def clasifica_y_extiende(f):
     for a in listaHojas:
         for i in a:
 #            print(Inorder(i))
-#            
+#
 
             if Inorder(i) == Inorder(f) and alfa_beta(f) == '1ALFA':
 	            a.remove(i)
@@ -213,14 +219,14 @@ def clasifica_y_extiende(f):
                 a.append(new1)
                 a.append(new2)
 #	            a.insert(i,[new1,new2])
-            
+
             elif Inorder(i) == Inorder(f) and alfa_beta(f) == '4ALFA':
                 a.remove(i)
                 new1 = f.right.left
                 new2 = Tree('-',None,f.right.right)
                 a.append(new1)
                 a.append(new2)
-                
+
             elif Inorder(i) == Inorder(f) and alfa_beta(f) == '1BETA':
                 a.remove(i)
                 new1 = Tree('-',None,f.right.left)
@@ -229,7 +235,7 @@ def clasifica_y_extiende(f):
                 hoja_nueva.append(new2)
                 a.append(new1)
                 listaHojas.append(hoja_nueva)
-                
+
             elif Inorder(i) == Inorder(f) and alfa_beta(f) == '2BETA':
                 a.remove(i)
                 new1 = i.left
@@ -238,7 +244,7 @@ def clasifica_y_extiende(f):
                 hoja_nueva.append(new2)
                 a.append(new1)
                 listaHojas.append(hoja_nueva)
-                
+
             elif Inorder(i) == Inorder(f) and alfa_beta(f) == '3BETA':
                 a.remove(i)
                 new1 = Tree('-',None,f.left)
@@ -247,7 +253,7 @@ def clasifica_y_extiende(f):
                 hoja_nueva.append(new2)
                 a.append(new1)
                 listaHojas.append(hoja_nueva)
-                
+
 
 #ki = Tree('O',q,p)
 
@@ -259,9 +265,9 @@ def clasifica_y_extiende(f):
 #for i in listaHojas:
 #    for j in i:
 #        print (Inorder(j))
-#print("-------")  
+#print("-------")
 #clasifica_y_extiende(Tree('-',None,Tree('Y',q,p)))
-#print("-------")	
+#print("-------")
 #for i in listaHojas:
 #    print(".......")
 #    for j in i:
@@ -296,7 +302,7 @@ def Tableaux(f):
      global listaInterpsVerdaderas
 
      A = String2Tree(f)
-     listaHojas = [[A]] 
+     listaHojas = [[A]]
 
      while (len(listaHojas) > 0):
          hoja = choice(listaHojas)
@@ -322,7 +328,7 @@ def Tableaux(f):
 #listaHojas= [[p],[Tree('Y',q,p),q]]
 #print(Tableaux(listaHojas))
 #print(choice(listaHojas))
-print(Inorder(String2Tree("pq>-rO")))
+#print(Inorder(String2Tree("pq>-rO")))
 #lista=[[(String2Tree("pqY"))]]
 #for i in lista:
 #    print(i)
@@ -334,18 +340,19 @@ print(Inorder(String2Tree("pq>-rO")))
 #        print(Inorder(j))
 #    print("--------------------")
 #print(listaHojas)
-     
- 
-    
+
+
+
 # AQUÍ SE PONE LA FÓRMULA
-formula = ("pq>-rO")
-ta = Tableaux(formula)
+#formula = ("pq>-rO")
+#ta = Tableaux(formula)
 
 # Imprime el resultado en consola
-if len(ta) == 0:
-    print('La fórmula es insatisfacible')
-else:
-    print('La fórmula es satisfacible.')
-    print('Las hojas abiertas del tableaux son:')
-    for l in ta:
-        print(imprime_hoja(l))
+#if len(ta) == 0:
+#    print('La fórmula es insatisfacible')
+#else:
+#    print('La fórmula es satisfacible.')
+#    print('Las hojas abiertas del tableaux son:')
+#    for l in ta:
+#        print(imprime_hoja(l))
+#
