@@ -55,7 +55,7 @@ def enFNC(A):
 # Input: A (cadena) en notacion inorder
 # Output: B (cadena), Tseitin
 def Tseitin(A, letrasProposicionalesA):
-    letrasProposicionalesB = [chr(x) for x in range(256, 300)]
+    letrasProposicionalesB = [chr(x) for x in range(1300, 5000)]
     assert(not bool(set(letrasProposicionalesA) & set(letrasProposicionalesB))), u"¡Hay letras proposicionales en común!"
 
     L = []
@@ -133,7 +133,7 @@ def formaClausal(A):
             L.append(Clausula(A))
             A = []
         else:
-            if A[count] is "Y":
+            if A[count] == "Y":
                 L.append(Clausula(A[:count]))
                 A = A[count+1:]
                 count = 0
@@ -150,15 +150,16 @@ letrasProposicionalesA = ['p', 'q', 'r', 's', 't']
 
 # Test Tseitin()
 # Descomente el siguiente código y corra el presente archivo
-formula = "(pYq)"
-print(Tseitin(formula, letrasProposicionalesA)) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
-
+#formula = "(pYq)"
+#a=Tseitin(formula, letrasProposicionalesA)
+#print(Tseitin(formula, letrasProposicionalesA)) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
+#print(formaClausal(a))
 # Test Clausula()
 # Descomente el siguiente código y corra el presente archivo
-c = "pO-qOr"
-print(Clausula(c)) # Debe obtener ['p', '-q', 'r']
+#c = "pO-qOr"
+#print(Clausula(c)) # Debe obtener ['p', '-q', 'r']
 
 # Test formaClausal()
 # Descomente el siguiente código y corra el presente archivo
-f = "pO-qOrY-sOt"
-print(formaClausal(f)) # Debe obtener [['p', '-q', 'r'], ['-s', 't']]
+#f = "pO-qOrY-sOt"
+#print(formaClausal(f)) # Debe obtener [['p', '-q', 'r'], ['-s', 't']]

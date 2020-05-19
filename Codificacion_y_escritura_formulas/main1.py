@@ -32,9 +32,15 @@ Nobjeto = 10
 
 
 letras = []
-print(C.codifica3(2,1,3,Nfilas,9,10))
-print(C.decodifica3(193,9,9,10)[1])
-
+print(C.codifica3(9,9,9,10,10,10)+256)
+print(C.decodifica3(ord("Ӧ")-256,10,10,10))
+a= True
+if a:
+    print("r")
+    a=False
+else:
+    print("j")
+#print(ord("Ÿ"))
 #print("\n\n(filas x columnas) x objetos")
 #for i in range(Nfilas):
 #    for j in range(Ncolumnas):
